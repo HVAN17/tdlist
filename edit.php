@@ -1,74 +1,43 @@
 <?php
-include 'db.php';
+include 'config.php';
 
-// Kiểm tra nếu có tham số `id` được truyền
-if (isset($_GET['id'])) {
-    $id = intval($_GET['id']); // Lấy ID từ URL
+$id = $_GET['id'];
+$sql = "SELECT * FROM students WHERE id = $id";
+$result = $conn->query($sql);
+$student = $result->fetch_assoc();
 
-    // Truy vấn lấy thông tin sinh viên theo ID
-    $sql = "SELECT * FROM students WHERE id = $id";
-    $result = $conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        $student = $result->fetch_assoc(); // Gán thông tin sinh viên vào biến $student
-    } else {
-        echo "Không tìm thấy sinh viên với ID này.";
-        exit;
-    }
-} else {
-    echo "ID không hợp lệ.";
-    exit;
-}
-
-// Xử lý cập nhật thông tin khi form được submit
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $new_id = intval($_POST['id']);
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['name'];
     $email = $_POST['email'];
     $age = $_POST['age'];
 
-    // Kiểm tra xem ID mới có trùng với ID nào đã tồn tại (trừ chính ID hiện tại)
-    $check_sql = "SELECT * FROM students WHERE id = $new_id AND id != $id";
-    $check_result = $conn->query($check_sql);
-
-    if ($check_result->num_rows > 0) {
-        echo "ID này đã tồn tại. Vui lòng chọn ID khác.";
+    $sql = "UPDATE students SET name='$name', email='$email', age=$age WHERE id=$id";
+    if ($conn->query($sql) === TRUE) {
+        header("Location: index.php");
     } else {
-        // Cập nhật thông tin sinh viên, bao gồm cả ID
-        $sql = "UPDATE students SET id = $new_id, name='$name', email='$email', age='$age' WHERE id = $id";
-        if ($conn->query($sql) === TRUE) {
-            header("Location: index.php"); // Quay về trang danh sách sinh viên
-            exit;
-        } else {
-            echo "Lỗi: " . $conn->error;
-        }
+        echo "Lỗi: " . $conn->error;
     }
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Chỉnh sửa sinh viên</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sửa thông tin sinh viên</title>
 </head>
 <body>
-    <h1>Chỉnh sửa thông tin sinh viên</h1>
-    <form action="" method="post">
-        <label for="id">ID:</label>
-        <input type="number" id="id" name="id" value="<?= htmlspecialchars($student['id']) ?>" required>
-
-        <label for="name">Tên:</label>
-        <input type="text" id="name" name="name" value="<?= htmlspecialchars($student['name']) ?>" required>
-
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" value="<?= htmlspecialchars($student['email']) ?>" required>
-
-        <label for="age">Tuổi:</label>
-        <input type="number" id="age" name="age" value="<?= htmlspecialchars($student['age']) ?>" required>
-
-        <input type="submit" value="Cập nhật">
+    <h1>Sửa thông tin sinh viên</h1>
+    <form method="POST">
+        <label>Tên:</label><br>
+        <input type="text" name="name" value="<?= $student['name'] ?>" required><br>
+        <label>Email:</label><br>
+        <input type="email" name="email" value="<?= $student['email'] ?>" required><br>
+        <label>Tuổi:</label><br>
+        <input type="number" name="age" value="<?= $student['age'] ?>" required><br><br>
+        <button type="submit">Cập nhật</button>
     </form>
+    <a href="index.php">Quay lại</a>
 </body>
 </html>
