@@ -1,0 +1,131 @@
+/* style.css */
+
+/* Tổng quan */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffe6f0; /* Hồng pastel nhạt */
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Tiêu đề */
+h1 {
+    text-align: center;
+    color: #690b3a; /* Hồng pastel đậm */
+    margin-top: 20px;
+}
+
+/* Bảng */
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #ff99c2; /* Đường viền hồng pastel */
+}
+
+th {
+    background-color: #ffcce0; /* Hồng pastel nhạt cho tiêu đề */
+}
+
+/* Hiệu ứng khi di chuột qua hàng trong bảng */
+table tr:hover {
+    background-color: #ff99c2; /* Hồng đậm khi hover */
+    transition: background-color 0.3s ease; /* Hiệu ứng mượt */
+}
+
+/* Hiệu ứng tên sinh viên */
+td.name:hover {
+    color: #ff3385; /* Hồng đậm */
+    font-weight: bold;
+}
+
+/* Liên kết */
+td a {
+    text-decoration: none;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+td a.edit {
+    background-color: #4caf50; /* Nút chỉnh sửa màu xanh lá */
+}
+
+td a.delete {
+    background-color: #f44336; /* Nút xóa màu đỏ */
+}
+
+td a:hover {
+    opacity: 0.8;
+}
+
+a {
+    color: #ff66b3; /* Liên kết màu hồng pastel */
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Nút thêm sinh viên mới ở góc phải */
+a.add-button {
+    display: block;
+    background-color: #eeccdd;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-align: left;
+    font-size: 16px;
+    margin: 20px auto 10px;
+    width: fit-content;
+}
+
+a.add-button:hover {
+    background-color: #ff3385; /* Hồng đậm hơn khi hover */
+}
+
+/* Nút và input */
+button, input[type="submit"] {
+    background-color: #4caf50; /* Màu xanh lá */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button:hover, input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+/* Biểu mẫu */
+form {
+    width: 50%;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-top: 30px;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+input[type="text"], input[type="email"], input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
