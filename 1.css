@@ -1,0 +1,20 @@
+/* Định dạng chung cho bảng */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+
+tbody tr:nth-child(odd) {
+    background-color: #efe7dd; /* Màu cho hàng lẻ */
+}
+
+tbody tr:nth-child(even) {
+    background-color: #d1e2f1; /* Màu cho hàng chẵn */
+}
